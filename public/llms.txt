@@ -1,0 +1,8 @@
+# CeeVeeForYou
+
+> AI-powered, ATS-friendly CV builder. Elegant one-page résumés exported as pixel-perfect PDFs, set in Arial, with an installable PWA experience.
+
+## Pages
+- [Home](/): Product overview, features, how it works, and FAQ
+- [Sign in](/login): Account sign-in
+- [Create account](/signup): Free account creation
