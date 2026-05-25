@@ -32,7 +32,7 @@ function Dashboard() {
       const base = blankCV();
       const { data, error } = await supabase
         .from("cvs")
-        .insert({ user_id: user!.id, title: base.title, personal_info: base.personal_info, summary: base.summary, education: base.education, experience: base.experience, skills: base.skills, settings: base.settings })
+        .insert({ user_id: user!.id, title: base.title, personal_info: base.personal_info as any, summary: base.summary, education: base.education as any, experience: base.experience as any, skills: base.skills as any, settings: base.settings as any })
         .select("id").single();
       if (error) throw error;
       await supabase.from("cv_events").insert({ user_id: user!.id, cv_id: data.id, event_type: "create" });
