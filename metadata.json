@@ -1,0 +1,6 @@
+{
+  "name": "CeeVeeForYou",
+  "description": "An ATS-friendly CV and résumé builder with live A4 preview, clean editorial typography, and AI-assisted summaries and bullet points.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

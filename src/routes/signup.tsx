@@ -25,10 +25,17 @@ function SignupPage() {
     e.preventDefault();
     setBusy(true);
     const { error } = await supabase.auth.signUp({
-      email, password,
-      options: { data: { full_name: fullName }, emailRedirectTo: `${window.location.origin}/dashboard` },
+      email,
+      password,
+      options: {
+        data: { full_name: fullName },
+        emailRedirectTo: `${window.location.origin}/dashboard`,
+      },
     });
-    if (error) { setBusy(false); return toast.error(error.message); }
+    if (error) {
+      setBusy(false);
+      return toast.error(error.message);
+    }
     // Auto-confirm is on — try sign-in immediately
     const { error: signErr } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
@@ -36,13 +43,46 @@ function SignupPage() {
     nav({ to: "/dashboard" });
   }
 
-  return <AuthShell title="Start free." sub="No verification. No friction.">
-    <form onSubmit={onSubmit} className="space-y-4">
-      <Field label="Full name"><input className="ipt" required value={fullName} onChange={(e) => setFullName(e.target.value)} /></Field>
-      <Field label="Email"><input className="ipt" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
-      <Field label="Password"><input className="ipt" type="password" required minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} /></Field>
-      <button disabled={busy} className="btn-primary w-full">{busy ? "Creating…" : "Create account"}</button>
-      <p className="text-center text-sm text-muted-foreground">Have an account? <Link to="/login" className="text-foreground underline">Sign in</Link></p>
-    </form>
-  </AuthShell>;
+  return (
+    <AuthShell title="Start free." sub="No verification. No friction.">
+      <form onSubmit={onSubmit} className="space-y-4">
+        <Field label="Full name">
+          <input
+            className="ipt"
+            required
+            value={fullName}
+            onChange={(e) => setFullName(e.target.value)}
+          />
+        </Field>
+        <Field label="Email">
+          <input
+            className="ipt"
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Field>
+        <Field label="Password">
+          <input
+            className="ipt"
+            type="password"
+            required
+            minLength={8}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Field>
+        <button disabled={busy} className="btn-primary w-full">
+          {busy ? "Creating…" : "Create account"}
+        </button>
+        <p className="text-center text-sm text-muted-foreground">
+          Have an account?{" "}
+          <Link to="/login" className="text-foreground underline">
+            Sign in
+          </Link>
+        </p>
+      </form>
+    </AuthShell>
+  );
 }
